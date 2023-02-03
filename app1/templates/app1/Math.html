@@ -1,0 +1,17 @@
+{% extends 'app1/base.html' %} {% block body %} {% include "app1/header.html" %}
+
+<div class="container">
+  <h1>This is Home page</h1>
+
+  <form action="{% url 'app1:math' %}" method="post">
+    {% csrf_token %} 
+    {{M_form}}
+
+    <input type="submit" />
+      <h1>  {{r}}</h1>
+    <input type ="text" value = "{{r}}">
+  </form>
+
+  <a href="{% url 'app1:contact' %}">Contact</a>
+</div>
+{% endblock body %}

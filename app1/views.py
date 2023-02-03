@@ -9,8 +9,17 @@ class newTaskForm(forms.Form):
     name = forms.CharField(label='Name :', widget=forms.TextInput(attrs={'class': 'form-control'}))
     # name = forms.CharField(label='name :')
     # Address = forms.CharField(label='Address :')
-
-    
+m = {
+    'num1':0,
+    'num2':0,
+    'result':0,
+}
+class maths(forms.Form):
+    num1 = forms.CharField(label='Number 1', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    num2 = forms.CharField(label='Number 2', widget=forms.TextInput(attrs={'class': 'form-control'}))
+    m['num1'] = num1
+    m['num2'] = num2
+    m['result'] = num2
 def  index(request):
     if request.method == "POST":
         fem = newTaskForm(request.POST)
@@ -31,4 +40,22 @@ def  index(request):
 def contact(request):
     return render(request, 'app1/contact.html',{
         'task':tasks
+    })
+def  math(request):
+    if request.method == "POST":
+        fem = maths(request.POST)
+        if fem.is_valid():
+            n1 = int(fem.cleaned_data['num1'])
+            n2 = int(fem.cleaned_data['num2'])
+            # n = fem.cleaned_data['name']
+            # address = fem.cleaned_data['Address']
+            
+        else:
+            return render(request, 'app1/Math.html',{
+                'M_form':fem,
+                'r':0
+            })
+    return render(request, 'app1/Math.html',{
+        'M_form':maths(),
+        'r':n1+n2
     })
