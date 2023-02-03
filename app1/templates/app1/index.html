@@ -1,15 +1,14 @@
-{% extends 'app1/base.html' %}
- {% block body %}
+{% extends 'app1/base.html' %} {% block body %} {% include "app1/header.html" %}
 
- <div class="setting">
-    <h1>This is Home page</h1>
-    <form action="#" method="post">
-        {% csrf_token %}
-        {{form}}
-        <input type="submit">
-    </form>
-<a href="{% url 'app1:contact' %}">Contact</a>
+<div class="container">
+  <h1>This is Home page</h1>
+
+  <form action="{% url 'app1:home' %}" method="post">
+    {% csrf_token %} {{form}}
+
+    <input type="submit" />
+  </form>
+
+  <a href="{% url 'app1:contact' %}">Contact</a>
 </div>
 {% endblock body %}
-
-
