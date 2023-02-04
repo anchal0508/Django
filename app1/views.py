@@ -2,6 +2,7 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django import forms
 from django.shortcuts import render, HttpResponse
+from app1.models import members
 tasks = ['foo','bar','teo']
 
 class newTaskForm(forms.Form):
@@ -17,9 +18,7 @@ m = {
 class maths(forms.Form):
     num1 = forms.CharField(label='Number 1', widget=forms.TextInput(attrs={'class': 'form-control'}))
     num2 = forms.CharField(label='Number 2', widget=forms.TextInput(attrs={'class': 'form-control'}))
-    m['num1'] = num1
-    m['num2'] = num2
-    m['result'] = num2
+    
 def  index(request):
     if request.method == "POST":
         fem = newTaskForm(request.POST)
@@ -42,14 +41,18 @@ def contact(request):
         'task':tasks
     })
 def  math(request):
+    n1=0
+    n2=0
     if request.method == "POST":
         fem = maths(request.POST)
         if fem.is_valid():
-            n1 = int(fem.cleaned_data['num1'])
-            n2 = int(fem.cleaned_data['num2'])
-            # n = fem.cleaned_data['name']
-            # address = fem.cleaned_data['Address']
-            
+            # n1 = int(fem.cleaned_data['num1'])
+            # n2 = int(fem.cleaned_data['num2']) 
+            m['num1']  = int(fem.cleaned_data['num1'])
+            m['num2'] = int(fem.cleaned_data['num2']) 
+            m['result'] =m['num2']+m['num1']
+            print(m['result'])
+            # return HttpResponseRedirect(reverse('app1:math'))
         else:
             return render(request, 'app1/Math.html',{
                 'M_form':fem,
@@ -57,5 +60,16 @@ def  math(request):
             })
     return render(request, 'app1/Math.html',{
         'M_form':maths(),
-        'r':n1+n2
+        'r':m['result'],
+        
     })
+
+def table(request):
+    data = members.objects.all()
+    # for i in data:
+    #     print(i['name'])
+    # print(data.name)
+    data2 = {
+        'Ttable':data
+    }
+    return render(request,'app1/table.html',data2)
