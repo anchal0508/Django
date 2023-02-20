@@ -3,7 +3,7 @@
 <div class="container">
   <h1>This is Home page</h1>
 
-  <form action="{% url 'app1:home' %}" method="post">
+  <form action="{% url 'app1:reg' %}" method="post">
     {% csrf_token %} {{form}}
 
     <input id  ="one" type="submit" />
@@ -15,7 +15,7 @@
   var item = document.getElementById("one");
 item.onclick = function() {
 	document.getElementById('one').style.marginLeft = "50px";
-  document.writeln("Hello");
+  
 }
 </script>
 {% endblock body %}

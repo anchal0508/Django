@@ -4,8 +4,14 @@
   <h1>This is Table page</h1>
  <table class="table table-striped table-dark">
   <tr><th scope="col">ID</th>  <th scope="col">Name</th>  <th scope="col">Last Name</th>  <th scope="col">Father</th>  <th scope="col">Address</th></tr> 
+
  {% for h in Ttable  %}
- <tr><th scope="row">{{h.id}}</th> <td>{{h.name}}</td>  <td>{{h.lastName}}</td>  <td>{{h.father}}</td>  <td>{{h.address}}</td></tr>
+ 
+ <tr>
+  
+  <th scope="row">{{h.id}}</th> <td>{{h.name}}</td>  <td>{{h.lastName}}</td>  <td>{{h.father}}</td>  <td>{{h.address}}</td>
+
+</tr>
  
  {% endfor %}
  </table>
